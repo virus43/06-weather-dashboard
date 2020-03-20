@@ -1,10 +1,12 @@
 localStorage.clear();
 
+appid= "fb258481058403afaab62ec3f0a0fda4";
+
 var cities =[];
 
 function fiveDayWeather(city) {
 
-  fiveDayQueryURL="https://api.openweathermap.org/data/2.5/forecast?q="+ city + "&units=imperial&appid=fb258481058403afaab62ec3f0a0fda4";
+  fiveDayQueryURL="https://api.openweathermap.org/data/2.5/forecast?q="+ city + "&units=imperial&appid=" + appid;
 
   $.ajax({
       url: fiveDayQueryURL,
@@ -30,7 +32,6 @@ function fiveDayWeather(city) {
           var hour = response.list[i].dt_txt.split(" ")[1].split(":")[0];
           
           if (parseInt(hour) === 3) {
-            // $("#five-day").append(JSON.stringify(response.list[i].dt_txt.split(" ")[0]));
             days++;
 
             column = $("<div>");
@@ -68,6 +69,8 @@ function fiveDayWeather(city) {
         
             card.append(cardBody);
             column.append(card);
+            column.append($("<br>"));
+
             forecasts.append(column);
             $("#five-day").append(forecasts);
             if (days>5){                
@@ -80,34 +83,37 @@ function fiveDayWeather(city) {
 
 }
 
-function currentDayWeather(city, storageIndicator) {
+function currentDayWeather(city) {
   
-  currentDayQueryURL ="https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=fb258481058403afaab62ec3f0a0fda4";
+  currentDayQueryURL ="https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + appid;
   $.ajax({
     url: currentDayQueryURL,
     method: "GET"
   }).then(function(response) {
 
-    console.log(response);
-    if (storageIndicator === 1) {
-    storeCity(JSON.parse(JSON.stringify(response.name)));
+    lon = JSON.parse(JSON.stringify(response.coord.lon));
+    lat = JSON.parse(JSON.stringify(response.coord.lat));
+
+    city = JSON.parse(JSON.stringify(response.name));
+    if (!cities.includes(city)) {
+    storeCity(city);
     displayCities();
     }
-    var today = new Date();
 
+    var today = new Date();
+    
     $("#current-day").empty();
 
     card = $("<div>");
     card.addClass("card bg-secondary text-light");
+    card.attr("id","current-card");
 
     cardBody = $("<div>");
     cardBody.addClass("card-body");
-
+    cardBody.attr("id","current-card-body");
+    
     cardTitle = $("<h5>");
     cardTitle.addClass("card-title");
-
-    cardBody = $("<div>");
-    cardBody.addClass("card-body");
 
     weatherImg = $("<img>");
     weatherImg.attr("src","https://openweathermap.org/img/wn/" + JSON.parse(JSON.stringify(response.weather[0].icon)) + "@2x.png");
@@ -119,10 +125,6 @@ function currentDayWeather(city, storageIndicator) {
     cardTemp.addClass("card-text");
     cardTemp.text("Temperature: " + JSON.parse(JSON.stringify(response.main.temp)) +" \xB0F");
 
-    cardFeels = $("<p>");
-    cardFeels.addClass("card-text");
-    cardFeels.text("Feels Like: " + JSON.parse(JSON.stringify(response.main.feels_like)) +" \xB0F");
-
     cardHumidity = $("<p>");
     cardHumidity.addClass("card-text");
     cardHumidity.text("Humidity: " + JSON.parse(JSON.stringify(response.main.humidity)) +" %");
@@ -130,17 +132,36 @@ function currentDayWeather(city, storageIndicator) {
     cardWind = $("<p>");
     cardWind.addClass("card-text");
     cardWind.text("Wind Speed: " + JSON.parse(JSON.stringify(response.wind.speed)) +" MPH");
-
-
+    
     cardBody.append(cardTitle);
     cardBody.append(cardTemp);
-    cardBody.append(cardFeels);
     cardBody.append(cardHumidity);
     cardBody.append(cardWind);
-
     card.append(cardBody);
+
     $("#current-day").append(card);
-    
+
+    uvQueryURL ="https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon +"&appid=" +appid;
+    $.ajax({
+      url: uvQueryURL,
+      method: "GET"
+    }).then(function(response) {
+
+      cardUVIndex = $("<p>");
+      cardUVIndex.addClass("card-text");
+      cardUVIndex.text("UV Index: ");
+      span = $("<span>");
+      span.text(JSON.parse(JSON.stringify(response.value)));
+      span.addClass("bg-danger p-2 rounded");
+      cardUVIndex.append(span);
+      currentCardBody = $("#current-card-body");
+      currentCardBody.append(cardUVIndex);
+      currentCard = $("#current-card");
+      currentCard.append(currentCardBody);
+      $("#current-day").append(currentCard);
+  
+    });
+
   });
 }
 
@@ -151,7 +172,6 @@ function storeCity(city) {
 function displayCities() {
   $("#cities-list").empty();  
   for (i=0;i<cities.length;i++) {
-    console.log(cities[i]);
     button = $("<button>");
     button.addClass("city-name btn btn-outline-secondary btn-block");
     button.text(cities[i]);
@@ -163,17 +183,17 @@ function displayCities() {
 document.addEventListener('click', function(event) {
   if (event.target.id === "submit-city") {
     city = $("#city-input").val();
+    currentDayWeather(city);
     fiveDayWeather(city);
-    currentDayWeather(city,1);
   }
 });
 
 
 document.addEventListener('click', function(event) {
-  // console.log(event.target.className.split(" ")[0]);
   if (event.target.className.split(" ")[0] === "city-name") {
+    currentDayWeather(event.target.innerText);
     fiveDayWeather(event.target.innerText);
-    currentDayWeather(event.target.innerText,0);
+
   }
 });
 
