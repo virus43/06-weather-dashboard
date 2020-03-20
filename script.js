@@ -4,7 +4,7 @@ var cities =[];
 
 function fiveDayWeather(city) {
 
-  fiveDayQueryURL="http://api.openweathermap.org/data/2.5/forecast?q="+ city + "&units=imperial&appid=fb258481058403afaab62ec3f0a0fda4";
+  fiveDayQueryURL="https://api.openweathermap.org/data/2.5/forecast?q="+ city + "&units=imperial&appid=fb258481058403afaab62ec3f0a0fda4";
 
   $.ajax({
       url: fiveDayQueryURL,
@@ -51,7 +51,7 @@ function fiveDayWeather(city) {
             cardTitle.text(JSON.parse(JSON.stringify(response.list[i].dt_txt.split(" ")[0])));
  
             weatherImg = $("<img>");
-            weatherImg.attr("src","http://openweathermap.org/img/wn/" + JSON.parse(JSON.stringify(response.list[i].weather[0].icon)) + "@2x.png");
+            weatherImg.attr("src","https://openweathermap.org/img/wn/" + JSON.parse(JSON.stringify(response.list[i].weather[0].icon)) + "@2x.png");
             
             cardTemp = $("<p>");
             cardTemp.addClass("card-text");
@@ -82,7 +82,7 @@ function fiveDayWeather(city) {
 
 function currentDayWeather(city, storageIndicator) {
   
-  currentDayQueryURL ="http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=fb258481058403afaab62ec3f0a0fda4";
+  currentDayQueryURL ="https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=fb258481058403afaab62ec3f0a0fda4";
   $.ajax({
     url: currentDayQueryURL,
     method: "GET"
@@ -110,7 +110,7 @@ function currentDayWeather(city, storageIndicator) {
     cardBody.addClass("card-body");
 
     weatherImg = $("<img>");
-    weatherImg.attr("src","http://openweathermap.org/img/wn/" + JSON.parse(JSON.stringify(response.weather[0].icon)) + "@2x.png");
+    weatherImg.attr("src","https://openweathermap.org/img/wn/" + JSON.parse(JSON.stringify(response.weather[0].icon)) + "@2x.png");
 
     cardTitle.text(JSON.parse(JSON.stringify(response.name)) + " (" + today.toLocaleDateString() +")");
     cardTitle.append(weatherImg);
