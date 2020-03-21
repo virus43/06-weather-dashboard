@@ -6,9 +6,9 @@ Dashboard to display weather. The dashboard displays current weather and the nex
 ### Sample
 https://virus43.github.io/06-weather-dashboard/
 
-##Built With
+## Built With
 
-..* HTML
-..* [Bootstrap](https://getbootstrap.com/)
-..* JQuery, Javascript, AJAX
-..* [OpenWeather API](https://openweathermap.org/)
+* HTML
+* [Bootstrap](https://getbootstrap.com/)
+* JQuery, Javascript, AJAX
+* [OpenWeather API](https://openweathermap.org/)
