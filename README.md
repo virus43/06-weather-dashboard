@@ -9,6 +9,6 @@ Dashboard to display weather. The dashboard displays current weather and the nex
 ## Built With
 
 * HTML
-* [Bootstrap](https://getbootstrap.com/)
+* [Bootstrap](https://getbootstrap.com/){:target="_blank"}
 * JQuery, Javascript, AJAX
-* [OpenWeather API](https://openweathermap.org/)
+* [OpenWeather API](https://openweathermap.org/){:target="_blank"}
