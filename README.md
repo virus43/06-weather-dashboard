@@ -12,3 +12,7 @@ Dashboard to display weather. The dashboard displays current weather and the nex
 * [Bootstrap](https://getbootstrap.com/)
 * JQuery, Javascript, AJAX
 * [OpenWeather API](https://openweathermap.org/)
+
+## Website Features
+
+* Display current weather which includes temperature, humidity, wind speed and UV index.
