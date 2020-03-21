@@ -1,3 +1,3 @@
 # Weather Dashboard
 
-![Alt text](/website-sceenshit.png?raw=true "Optional Title")
+![Alt text](/website-sceenshot.png?raw=true "Optional Title")
