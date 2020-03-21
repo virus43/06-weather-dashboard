@@ -203,6 +203,14 @@ document.addEventListener('click', function(event) {
   }
 });
 
+document.addEventListener('keypress', function(event) {
+  if (event.target.id === "city-input" & event.keyCode===13) {
+    city = $("#city-input").val();
+    currentDayWeather(city);
+    fiveDayWeather(city);
+  }
+});
+
 
 document.addEventListener('click', function(event) {
   if (event.target.className.split(" ")[0] === "city-name") {
