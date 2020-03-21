@@ -1,3 +1,3 @@
 # Weather Dashboard
 
-![Screenshot](website-sceenshot.png)
+![Screenshot](website-screenshot.PNG)
