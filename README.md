@@ -1,6 +1,7 @@
 # Weather Dashboard
 
 Dashboard to display weather. The dashboard displays current weather and the next 5 day forecast for the searched city. 
+
 ![Screenshot](website-screenshot.PNG)
 
 ### Sample
