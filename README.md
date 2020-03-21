@@ -1,6 +1,6 @@
 # Weather Dashboard
 
-Dashboard to display weather. The dashboard display current weather for the searched city and the next 5 day forecast. The dashboard is build using html, bootstrap, jquery and openweathermap API.
+Dashboard to display weather. The dashboard displays current weather and the next 5 day forecast for the searched city. The dashboard is build using html, bootstrap, jquery and openweathermap API.
 
 ![Screenshot](website-screenshot.PNG)
 
