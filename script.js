@@ -1,8 +1,14 @@
-localStorage.clear();
-
 appid= "fb258481058403afaab62ec3f0a0fda4";
 
 var cities =[];
+
+function init() {
+  storedCity = localStorage.getItem("City");
+  currentDayWeather(storedCity);
+  fiveDayWeather(storedCity);
+}
+
+init();
 
 function fiveDayWeather(city) {
 
@@ -146,13 +152,22 @@ function currentDayWeather(city) {
       url: uvQueryURL,
       method: "GET"
     }).then(function(response) {
-
+      uvIndex = JSON.parse(JSON.stringify(response.value))
       cardUVIndex = $("<p>");
       cardUVIndex.addClass("card-text");
       cardUVIndex.text("UV Index: ");
       span = $("<span>");
-      span.text(JSON.parse(JSON.stringify(response.value)));
-      span.addClass("bg-danger p-2 rounded");
+      span.text(uvIndex);
+      if (uvIndex <=2){
+        span.addClass("bg-success p-2 rounded");
+      }
+      else if (uvIndex>2 & uvIndex <=5) {
+        span.addClass("bg-warning p-2 rounded");
+      }
+      else {
+        span.addClass("bg-danger p-2 rounded");
+      }
+
       cardUVIndex.append(span);
       currentCardBody = $("#current-card-body");
       currentCardBody.append(cardUVIndex);
@@ -167,6 +182,7 @@ function currentDayWeather(city) {
 
 function storeCity(city) {
   cities.push(city);
+  localStorage.setItem('City',city);
 }
 
 function displayCities() {
@@ -178,7 +194,6 @@ function displayCities() {
     $("#cities-list").append(button);
   }
 }
-
 
 document.addEventListener('click', function(event) {
   if (event.target.id === "submit-city") {
@@ -196,6 +211,8 @@ document.addEventListener('click', function(event) {
 
   }
 });
+
+
 
 
 
