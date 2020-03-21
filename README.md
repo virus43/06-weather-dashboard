@@ -13,7 +13,7 @@ Dashboard to display weather. The dashboard displays current weather and the nex
 * JQuery, Javascript, AJAX
 * [OpenWeather API](https://openweathermap.org/)
 
-## Website Features
+## Features
 
 * Ability to search current weather and forecasts for over 200,000 cities using the openweathermap API 
 * Displays current weather which includes temperature, humidity, wind speed and UV index of the searched city
