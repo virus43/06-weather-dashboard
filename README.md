@@ -4,7 +4,7 @@ Dashboard to display weather. The dashboard displays current weather and the nex
 
 ![Screenshot](website-screenshot.PNG)
 
-[Sample](https://virus43.github.io/06-weather-dashboard/)
+[Sample](https://virus43.github.io/cu-hw-06-weather-dashboard/)
 
 ## Built With
 
